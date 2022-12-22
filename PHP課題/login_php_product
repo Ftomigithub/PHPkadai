@@ -1,0 +1,63 @@
+# テーブル作成
+
+create table PHP_user_table (
+    userID      int(10)             NOT NULL    AUTO_INCREMENT,
+    Name        varchar(30)        NOT NULL,
+    password    varchar(30),
+    mail        varchar(30),
+    primary key (userID)
+    );
+
+create table PHP_status_table (
+    statusID        int(10)         NOT NULL    AUTO_INCREMENT,
+    status          varchar(10)      NOT NULL,
+    primary key (statusID)
+    );
+
+create table PHP_type_table (
+    typeID          int(10)         NOT NULL    AUTO_INCREMENT,
+    typeName        varchar(20)     NOT NULL,
+    primary key (typeID)
+    );
+
+create table PHP_order_table (
+    orderID         int(10)         NOT NULL    AUTO_INCREMENT,
+    orderDate       date,
+    orderStatus     int(1)          NOT NULL,
+    orderUser       int(10)         NOT NULL,
+    typeID          int(10)         NOT NULL,
+    productName     varchar(20)     NOT NULL,
+    price           int(10),
+    primary key (orderID),
+    foreign key (typeID)    references PHP_type_table(typeID),
+    foreign key (orderStatus) references PHP_status_table(statusID),
+    foreign key (orderUser) references PHP_user_table(userID)
+    );
+
+
+# 情報の挿入
+
+insert into PHP_user_table(Name, password, mail) values ("hoge", "hoge", "hoge@yic.ac.jp");
+insert into PHP_user_table(Name, password, mail) values ("k-ygawa", "kojikoji", "k-ygawa@yic.ac.jp");
+insert into PHP_user_table(Name, password, mail) values ("sugi", "sugisugi", "sugi@yic.ac.jp");
+
+insert into PHP_status_table(status) values ("発注済");
+insert into PHP_status_table(status) values ("納品済");
+insert into PHP_status_table(status) values ("未発注");
+
+insert into PHP_type_table(typeName) values ("書籍");
+insert into PHP_type_table(typeName) values ("文房具");
+insert into PHP_type_table(typeName) values ("CD");
+
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-22", 1, 2, 2, "鉛筆", 600);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-05-21", 3, 3, 1, "CCNA参考書", 4268);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-02-22", 1, 2, 1, "吾輩は猫である", 622);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2021-04-06", 1, 1, 1, "Web入門", 2526);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-30", 2, 1, 3, "jazz", 2121);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-30", 1, 2, 1, "データベースとSQL", 2400);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-22", 1, 2, 2, "シャーペン", 1022);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-24", 1, 2, 2, "消しゴム", 120);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-20", 1, 2, 2, "ボールペン", 150);
+insert into PHP_order_table(orderDate, orderStatus, orderUser, typeID, productName, price) values ("2022-06-22", 1, 2, 2, "シャー芯", 100);
+
+
